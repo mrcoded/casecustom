@@ -1,7 +1,7 @@
 import React from "react";
-import PhoneTemplate from "./PhoneTemplate";
 import MaxWidthWrapper from "../shared/MaxWidthWrapper";
 import { Check, Star } from "lucide-react";
+import PhoneTemplate from "../PhoneTemplate";
 
 const Hero = () => {
   return (
