@@ -2,6 +2,8 @@
 //bg-zinc-950 border-zinc-950
 //bg-rose-950 border-rose-950
 
+import { PRODUCT_PRICES } from "../constant/product";
+
 export const COLORS = [
   { label: "Black", value: "black", tw: "zinc-950" },
   {
@@ -39,6 +41,42 @@ export const MODELS = {
     {
       label: "iPhone15",
       value: "iphone15",
+    },
+  ],
+} as const;
+
+export const MATERIALS = {
+  name: "material",
+  options: [
+    {
+      label: "Silicon",
+      value: "silicon",
+      description: undefined,
+      price: PRODUCT_PRICES.material.silicon,
+    },
+    {
+      label: "Soft Polycarbonate",
+      value: "polycarbonate",
+      description: "Scratch-resistant coating",
+      price: PRODUCT_PRICES.material.polycarbonate,
+    },
+  ],
+} as const;
+
+export const FINISHES = {
+  name: "finish",
+  options: [
+    {
+      label: "Smooth Finish",
+      value: "smooth",
+      description: undefined,
+      price: PRODUCT_PRICES.finish.smooth,
+    },
+    {
+      label: "Textured Finish",
+      value: "textured",
+      description: "Soft grippy texture",
+      price: PRODUCT_PRICES.finish.textured,
     },
   ],
 } as const;
