@@ -32,13 +32,11 @@ const PhonePreview = ({
 
     window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  });
+    return () => window.removeEventListener("resize", handleResize);
+  }, [ref.current]);
 
   let caseBackgroundColor = "bg-zinc-950";
-  if (color === "blue") caseBackgroundColor = "bg-blue-950";
+  if (color === "blue") caseBackgroundColor = "bg-blue-900";
   if (color === "rose") caseBackgroundColor = "bg-rose-950";
 
   return (
@@ -53,7 +51,7 @@ const PhonePreview = ({
         }}
       >
         <img
-          width={renderedDimensions.width / (3000 / 637)}
+          width={renderedDimensions.width / (3000 / 650)}
           className={cn(
             "phone-skew relative z-20 rounded-t-[15px] rounded-b-[10px] md:rounded-t-[30px] md:rounded-b-[20px]",
             caseBackgroundColor
