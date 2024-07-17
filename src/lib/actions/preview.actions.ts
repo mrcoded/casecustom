@@ -1,6 +1,6 @@
 "use server";
 
-import { BASE_PRICE, PRODUCT_PRICES } from "@/app/constant/product";
+import { BASE_PRICE, PRODUCT_PRICES } from "@/constant/product";
 import { db } from "@/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Order } from "@prisma/client";

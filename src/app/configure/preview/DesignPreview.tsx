@@ -1,8 +1,8 @@
 "use client";
 
 import { Configuration } from "@prisma/client";
-import { BASE_PRICE, PRODUCT_PRICES } from "@/app/constant/product";
-import { COLORS, MODELS } from "@/app/validators/option-validators";
+import { BASE_PRICE, PRODUCT_PRICES } from "@/constant/product";
+import { COLORS, MODELS } from "@/validators/option-validators";
 import PhoneTemplate from "@/components/PhoneTemplate";
 import { Button } from "@/components/ui/button";
 import { cn, formatPrice } from "@/lib/utils";

@@ -30,8 +30,8 @@ import {
   FINISHES,
   MATERIALS,
   MODELS,
-} from "@/app/validators/option-validators";
-import { BASE_PRICE } from "@/app/constant/product";
+} from "@/validators/option-validators";
+import { BASE_PRICE } from "@/constant/product";
 
 interface DesignCustomizationProps {
   configId: string;
