@@ -62,7 +62,7 @@ const DesignCustomization = ({
   const { toast } = useToast();
   const router = useRouter();
 
-  const { mutate: saveCustomize } = useMutation({
+  const { mutate: saveCustomize, isPending } = useMutation({
     mutationKey: ["save-customization"],
     mutationFn: async (args: SaveCustomizeArgs) => {
       await Promise.all([saveCustomizationHandler(), _saveCustomize(args)]);
@@ -95,7 +95,6 @@ const DesignCustomization = ({
 
   async function saveCustomizationHandler() {
     try {
-      console.log("clicked");
       const {
         left: caseLeft,
         top: caseTop,
@@ -400,6 +399,9 @@ const DesignCustomization = ({
                 )}
               </p>
               <Button
+                isLoading={isPending}
+                disabled={isPending}
+                loadingText="Saving"
                 onClick={() =>
                   saveCustomize({
                     configId,
