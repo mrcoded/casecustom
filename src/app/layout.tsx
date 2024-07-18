@@ -5,13 +5,11 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/lib/Providers";
+import { constructMetadata } from "@/lib/utils";
 
 const recursive = Recursive({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Welcome to CaseCustom",
-  description: "Customize your phone case",
-};
+export const metadata = constructMetadata();
 
 export default function RootLayout({
   children,
