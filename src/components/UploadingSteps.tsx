@@ -33,7 +33,7 @@ const UploadingSteps = () => {
           pathname.endsWith(step.url)
         );
 
-        const imgPath = `/snake-${i + 1}.png`;
+        const imgPath = `/step-${i + 1}.jpg`;
 
         return (
           <li key={step.name} className="relative overflow-hidden lg:flex-1">
