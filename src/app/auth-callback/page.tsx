@@ -19,7 +19,7 @@ const Page = () => {
     queryKey: ["auth-callback"],
     queryFn: async () => await getAuthStatus(),
     retry: true,
-    retryDelay: 500,
+    retryDelay: 200,
   });
 
   if (data?.success) {
@@ -30,6 +30,7 @@ const Page = () => {
       router.push("/");
     }
   }
+
   return (
     <div className="w-full mt-24 justify-center">
       <div className="flex flex-col items-center gap-2">
