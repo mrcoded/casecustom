@@ -1,7 +1,8 @@
-import { notFound } from "next/navigation";
 import React from "react";
+import { notFound } from "next/navigation";
+
+import { db } from "@/lib/db";
 import DesignCustomization from "./DesignCustomization";
-import { db } from "../../../db";
 
 interface PageProps {
   searchParams: {

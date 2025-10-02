@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
-import { Review } from "./Review";
+import { Review } from "@/components/LandingPage/Reviews/Review";
 
 const ReviewColumn = ({
   reviews,

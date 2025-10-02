@@ -1,23 +1,13 @@
-"use client";
-
-import PhoneTemplate from "@/components/PhoneTemplate";
 import { cn } from "@/lib/utils";
 import { HTMLAttributes } from "react";
+import PhoneTemplate from "@/components/PhoneTemplate";
+import { POSSIBLE_ANINMATION_DELAYS } from "@/constant/landing-page";
 
 interface ReviewProps extends HTMLAttributes<HTMLDivElement> {
   imgSrc: string;
 }
 
 export function Review({ imgSrc, className, ...props }: ReviewProps) {
-  const POSSIBLE_ANINMATION_DELAYS = [
-    "0s",
-    "0.1s",
-    "0.2s",
-    "0.3s",
-    "0.4s",
-    "0.5s",
-  ];
-
   const animationDelay =
     POSSIBLE_ANINMATION_DELAYS[
       Math.floor(Math.random() * POSSIBLE_ANINMATION_DELAYS.length)

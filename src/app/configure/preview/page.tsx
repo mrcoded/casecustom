@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import React from "react";
-import { db } from "../../../db";
+import { db } from "@/lib/db";
 import DesignPreview from "./DesignPreview";
 
 interface PageProps {
