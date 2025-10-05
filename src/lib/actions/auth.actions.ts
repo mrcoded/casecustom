@@ -1,29 +1,46 @@
 "use server";
 
-import { db } from "@/db";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import bcrypt from "bcrypt";
+import { db } from "@/lib/db";
 
-export const getAuthStatus = async () => {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+import { RegisterAuthFormValues } from "@/types/auth";
 
-  if (!user?.id || !user.email) {
-    throw new Error("Invalid user data!");
-  }
+export async function registerUserFn(
+  formData: RegisterAuthFormValues
+): Promise<RegisterAuthFormValues> {
+  //destructure data
+  const { email, password, name } = formData;
 
-  // Check for existing user and create if necessary
-  const existingUser = await db.user.findFirst({
-    where: { id: user.id },
-  });
+  try {
+    //check if user already exists in the db
+    const existingUser = await db.user.findUnique({
+      where: { email },
+    });
 
-  if (!existingUser) {
+    if (existingUser) {
+      return {
+        message: "User Already exists!",
+        success: false,
+      };
+    }
+
+    //Encrypt password with bcrypt
+    const hashedPassword = await bcrypt.hash(password, 16);
+
+    //Create new user
     await db.user.create({
       data: {
-        id: user.id,
-        email: user.email,
+        name,
+        email,
+        password: hashedPassword,
       },
     });
-  }
 
-  return { success: true };
-};
+    return {
+      success: true,
+      message: `Registration successful, redirecting to Login...`,
+    };
+  } catch (error) {
+    throw Error;
+  }
+}
