@@ -1,13 +1,14 @@
 import React from "react";
-import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "../ui/button";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getServerSession } from "next-auth";
+
+import { buttonVariants } from "@/components/ui/Button";
+import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 
 const Navbar = async () => {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const session = await getServerSession();
+  const user = session?.user;
 
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
@@ -58,7 +59,7 @@ const Navbar = async () => {
             ) : (
               <>
                 <Link
-                  href="/api/auth/register"
+                  href="/auth/register"
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
@@ -68,7 +69,7 @@ const Navbar = async () => {
                 </Link>
 
                 <Link
-                  href="/api/auth/login"
+                  href="/auth/login"
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
