@@ -1,20 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import {
-  CaseColor,
-  CaseFinish,
-  CaseMaterial,
-  PhoneModel,
-} from "@prisma/client";
-
-export type SaveCustomizeArgs = {
-  color: CaseColor;
-  finish: CaseFinish;
-  material: CaseMaterial;
-  model: PhoneModel;
-  configId: string;
-};
+import { db } from "@/config/db";
+import { SaveCustomizeArgs } from "@/app/configure/customize/customize.types";
 
 export async function saveCustomize({
   color,

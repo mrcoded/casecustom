@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { ArrowRight, Check } from "lucide-react";
 import PhoneTemplate from "@/components/PhoneTemplate";
-import { buttonVariants } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/button";
 import { GETTING_STARTED } from "@/constant/landing-page";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 

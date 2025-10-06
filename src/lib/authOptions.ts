@@ -1,5 +1,5 @@
 import { compare } from "bcrypt";
-import { db } from "@/lib/db";
+import { db } from "@/config/db";
 import { User, NextAuthOptions } from "next-auth";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";

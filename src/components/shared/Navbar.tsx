@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getServerSession } from "next-auth";
 
-import { buttonVariants } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/button";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 
 const Navbar = async () => {
