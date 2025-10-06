@@ -1,29 +1,30 @@
 import React from "react";
 import { notFound } from "next/navigation";
 
-import { db } from "@/lib/db";
-import DesignCustomization from "./DesignCustomization";
+import { db } from "@/config/db";
+import { CustomizePageProps } from "./customize.types";
 
-interface PageProps {
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}
-const Page = async ({ searchParams }: PageProps) => {
+import DesignCustomization from "./_components/DesignCustomization";
+
+const Page = async ({ searchParams }: CustomizePageProps) => {
   const { id } = searchParams;
 
+  //if no id from searchParams
   if (!id || typeof id !== "string") {
     return notFound();
   }
 
+  //Get configuration from db
   const configuration = await db.configuration.findUnique({
     where: { id },
   });
 
+  //if configuration is not found
   if (!configuration) {
     return notFound();
   }
 
+  //extract imageUrl, width and height
   const { imageUrl, width, height } = configuration;
 
   return (
