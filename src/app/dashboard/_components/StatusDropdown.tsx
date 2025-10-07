@@ -1,5 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { Check, ChevronsUpDown } from "lucide-react";
+
+import { OrderStatus } from "@prisma/client";
+import { useMutation } from "@tanstack/react-query";
+
+import { cn } from "@/lib/utils";
+import { changeOrderStatus } from "@/lib/actions/order-status.actions";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,12 +16,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { changeOrderStatus } from "@/lib/actions/order-status.actions";
-import { cn } from "@/lib/utils";
-import { OrderStatus } from "@prisma/client";
-import { useMutation } from "@tanstack/react-query";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 const LABEL_MAP: Record<keyof typeof OrderStatus, string> = {
   awaiting_shipment: "Awaiting Shipment",
@@ -29,8 +32,8 @@ const StatusDropdown = ({
 }) => {
   const router = useRouter();
 
+  // order change status function
   const { mutate } = useMutation({
-    mutationKey: ["change-order-status"],
     mutationFn: changeOrderStatus,
     onSuccess: () => router.refresh(),
   });
