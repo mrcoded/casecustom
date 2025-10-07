@@ -20,6 +20,7 @@ enum PhoneModel {
   iphone13
   iphone14
   iphone15
+  iphone16
 }
 
 enum CaseMaterial {
@@ -52,9 +53,11 @@ model Configuration {
 }
 
 model User {
-  id    String  @id @default(cuid())
-  email String
-  Order Order[]
+  id       String  @id @default(cuid())
+  name     String
+  email    String  @unique
+  password String
+  Order    Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
