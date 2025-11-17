@@ -37,7 +37,7 @@ const PhoneModelOptions = ({
             <DropdownMenuItem
               key={model.label}
               className={cn(
-                "flex text-sm gap-1 items-center p-1,5 cursor-default hover:bg-zinc-100",
+                "flex text-sm gap-1 items-center p-1,5 cursor-pointer hover:bg-zinc-100",
                 {
                   "bg-zinc-100": model.label === options.model.label,
                 }

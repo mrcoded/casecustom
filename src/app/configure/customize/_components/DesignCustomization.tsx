@@ -1,18 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-
-import { useMutation } from "@tanstack/react-query";
 
 import { useUploadThing } from "@/lib/utils/uploadthing";
-import { saveCustomizationHandler } from "@/services/save-customize.service";
 import { saveCustomize as _saveCustomize } from "@/lib/actions/customize.actons";
 
 import {
   CustomizeOptionsProps,
   DesignCustomizationProps,
-  SaveCustomizeArgs,
 } from "../customize.types";
 import {
   COLORS,
@@ -23,7 +18,6 @@ import {
 
 import CustomizeDnDArea from "./CustomizeDnDArea";
 import SaveCustomization from "./SaveCustomization";
-import { useToast } from "@/components/ui/use-toast";
 import CustomizeScrollArea from "./CustomizeScrollArea";
 
 const DesignCustomization = ({
@@ -31,9 +25,6 @@ const DesignCustomization = ({
   imageUrl,
   imageDimensions,
 }: DesignCustomizationProps) => {
-  const router = useRouter();
-  const { toast } = useToast();
-
   const phoneCaseRef = useRef<HTMLDivElement | null>(null);
   const containerCaseRef = useRef<HTMLDivElement | null>(null);
 
@@ -57,35 +48,6 @@ const DesignCustomization = ({
     finish: FINISHES.options[0],
   });
 
-  //saveCustomize mutation Function
-  const { mutate: saveCustomize, isPending } = useMutation({
-    mutationFn: async (args: SaveCustomizeArgs) => {
-      await Promise.all([
-        saveCustomizationHandler({
-          configId,
-          imageUrl,
-          startUpload,
-          phoneCaseRef,
-          containerCaseRef,
-          renderedDimension,
-          renderedPosition,
-        }),
-        _saveCustomize(args),
-      ]);
-    },
-    onError: (error) => {
-      toast({
-        title: "Something went wrong",
-        variant: "destructive",
-        description: error.message,
-      });
-    },
-    onSuccess(data) {
-      console.log(data);
-      router.push(`/configure/preview?id=${configId}`);
-    },
-  });
-
   return (
     <div className="relative mt-20 grid grid-cols-1 lg:grid-cols-3 mb-20 pb-20">
       <CustomizeDnDArea
@@ -105,8 +67,12 @@ const DesignCustomization = ({
         <SaveCustomization
           options={options}
           configId={configId}
-          isPending={isPending}
-          saveCustomizeFn={saveCustomize}
+          imageUrl={imageUrl}
+          startUpload={startUpload}
+          phoneCaseRef={phoneCaseRef}
+          renderedPosition={renderedPosition}
+          containerCaseRef={containerCaseRef}
+          renderedDimension={renderedDimension}
         />
       </div>
     </div>

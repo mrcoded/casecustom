@@ -7,7 +7,7 @@ import { CustomizePageProps } from "./customize.types";
 import DesignCustomization from "./_components/DesignCustomization";
 
 const Page = async ({ searchParams }: CustomizePageProps) => {
-  const { id } = searchParams;
+  const { id } = await searchParams;
 
   //if no id from searchParams
   if (!id || typeof id !== "string") {

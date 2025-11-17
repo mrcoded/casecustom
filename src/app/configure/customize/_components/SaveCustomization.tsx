@@ -2,16 +2,21 @@ import React from "react";
 import { formatPrice } from "@/lib/utils";
 
 import { BASE_PRICE } from "@/constant/product";
-import { SaveCustomizationProps } from "../customize.types";
+import { SaveCustomizeServiceProps } from "../customize.types";
+import { saveCustomize as _saveCustomize } from "@/lib/actions/customize.actons";
 
 import SaveCustomizationBtn from "@/components/ui/Button/SaveCustomizationBtn";
 
 const SaveCustomization = ({
   options,
   configId,
-  isPending,
-  saveCustomizeFn,
-}: SaveCustomizationProps) => {
+  imageUrl,
+  startUpload,
+  phoneCaseRef,
+  containerCaseRef,
+  renderedDimension,
+  renderedPosition,
+}: SaveCustomizeServiceProps) => {
   return (
     <div className="w-full px-8 h-16 bg-white">
       <div className="h-px w-full bg-zinc-200" />
@@ -27,8 +32,12 @@ const SaveCustomization = ({
           <SaveCustomizationBtn
             options={options}
             configId={configId}
-            isPending={isPending}
-            saveCustomizeFn={saveCustomizeFn}
+            imageUrl={imageUrl}
+            startUpload={startUpload}
+            phoneCaseRef={phoneCaseRef}
+            containerCaseRef={containerCaseRef}
+            renderedDimension={renderedDimension}
+            renderedPosition={renderedPosition}
           />
         </div>
       </div>

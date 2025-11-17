@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import NextImage from "next/image";
 
 import { Rnd } from "react-rnd";
@@ -14,8 +14,8 @@ const CustomizeDnDArea = ({
   containerCaseRef,
   imageUrl,
   imageDimensions,
-  setRenderedDimension,
   setRenderedPosition,
+  setRenderedDimension,
 }: CustomizeDnDAreaProps) => {
   return (
     <div
@@ -76,7 +76,8 @@ const CustomizeDnDArea = ({
           <NextImage
             src={imageUrl}
             fill
-            alt="your image"
+            priority
+            alt="uploaded image"
             className="pointer-events-none"
           />
         </div>

@@ -13,6 +13,7 @@ import {
   PhoneModel,
 } from "@prisma/client";
 import { ClientUploadedFileData } from "uploadthing/types";
+import { UseMutationResult } from "@tanstack/react-query";
 
 export interface CustomizeOptionsProps {
   color: (typeof COLORS)[number];
@@ -78,6 +79,7 @@ type StartUploadProps = (
 >;
 
 export interface SaveCustomizeServiceProps {
+  options: CustomizeOptionsProps;
   configId: string;
   startUpload: StartUploadProps;
   phoneCaseRef: {
@@ -105,11 +107,17 @@ export interface SaveCustomizeArgs {
   configId: string;
 }
 
-export interface SaveCustomizationProps {
+export interface CustomizationSaveProps {
   configId: string;
-  isPending: boolean;
+  imageUrl: string;
+  isPending?: boolean;
   options: CustomizeOptionsProps;
-  saveCustomizeFn: any;
+  saveCustomizatonFn: UseMutationResult<
+    void,
+    Error,
+    SaveCustomizeArgs,
+    unknown
+  >;
 }
 
 export interface CustomizationOptionsProps {
