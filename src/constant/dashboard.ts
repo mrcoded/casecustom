@@ -1,4 +1,4 @@
-import { lastMonthSum, lastWeekSum } from "@/services/dashboard.service";
+import { lastWeekSum, lastMonthSum } from "@/services/dashboard.service";
 
 const WEEKLY_GOAL = 500;
 const MONTHLY_GOAL = 2500;

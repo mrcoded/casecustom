@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/config/db";
 
 export const orders = await db.order.findMany({

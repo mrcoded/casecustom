@@ -15,7 +15,7 @@ const PhoneTemplate = ({
   return (
     <div
       className={cn(
-        "relative pointer-events-none z-50 overflow-hidden",
+        "relative pointer-events-none z-50 overflow-hidden rounded-[35.2px] backdrop-blur-0",
         className
       )}
       {...props}

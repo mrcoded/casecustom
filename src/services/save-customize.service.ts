@@ -5,7 +5,7 @@ import { saveCustomize as _saveCustomize } from "@/lib/actions/customize.actons"
 import { base64ToBlob } from "@/lib/utils/base64ToBlob";
 import { SaveCustomizeServiceProps } from "@/app/configure/customize/customize.types";
 
-export async function saveCustomizationHandler({
+export async function saveCustomizationService({
   configId,
   imageUrl,
   startUpload,
