@@ -6,14 +6,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoginAuthFormValues } from "@/types/auth";
-import { loginService, loginServiceFn } from "@/services/login.service";
+import { loginService } from "@/services/login.service";
 import { LoginAuthSchema } from "@/validators/auth-validator";
 
 import { Input } from "@/components/ui/input";
 import AuthButton from "@/components/ui/Button/AuthButton";
 
 export function LoginForm() {
-  const { loginUser, isPending } = loginService();
+  const { mutate: loginUser, isPending } = loginService();
 
   // Initialize validation
   const { control, handleSubmit } = useForm<LoginAuthFormValues>({
