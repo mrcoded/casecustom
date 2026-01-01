@@ -1,24 +1,24 @@
-import { notFound } from "next/navigation";
 import React from "react";
-import { db } from "@/lib/db";
-import DesignPreview from "./DesignPreview";
+import { notFound } from "next/navigation";
 
-interface PageProps {
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}
-const Page = async ({ searchParams }: PageProps) => {
-  const { id } = searchParams;
+import { db } from "@/config/db";
+import DesignPreview from "./_components/DesignPreview";
+import { CustomizePageProps } from "../customize/customize.types";
 
+const Page = async ({ searchParams }: CustomizePageProps) => {
+  const { id } = await searchParams;
+
+  //if no id from searchParams
   if (!id || typeof id !== "string") {
     return notFound();
   }
 
+  //Get updated configuration
   const configuraton = await db.configuration.findUnique({
     where: { id },
   });
 
+  //if updated configuration not found
   if (!configuraton) {
     return notFound();
   }

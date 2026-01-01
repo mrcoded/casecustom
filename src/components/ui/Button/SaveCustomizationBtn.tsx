@@ -1,23 +1,51 @@
-import React from "react";
+"use client";
+
+import React, { useCallback } from "react";
 import { ArrowRight } from "lucide-react";
 
-import { Button } from "../button";
+import { Button } from "@/components/ui/button";
 
-import { SaveCustomizationProps } from "@/app/configure/customize/customize.types";
+import useSaveCustomizaton from "@/hooks/useSaveCustomization";
+import { saveCustomizationService } from "@/services/save-customize.service";
+import { SaveCustomizeServiceProps } from "@/app/configure/customize/customize.types";
 
 const SaveCustomizationBtn = ({
   configId,
-  isPending,
   options,
-  saveCustomizeFn,
-}: SaveCustomizationProps) => {
+  imageUrl,
+  startUpload,
+  phoneCaseRef,
+  containerCaseRef,
+  renderedDimension,
+  renderedPosition,
+}: SaveCustomizeServiceProps) => {
+  //Customization Save function
+  const customizationSaveFn = useCallback(() => {
+    return saveCustomizationService({
+      options,
+      configId,
+      imageUrl,
+      startUpload,
+      phoneCaseRef,
+      containerCaseRef,
+      renderedDimension,
+      renderedPosition,
+    });
+  }, [options, configId]);
+
+  //Save Customization hooks handler
+  const { isPending, saveConfig } = useSaveCustomizaton({
+    configId,
+    customizationSaveFn,
+  });
+
   return (
     <Button
       isLoading={isPending}
       disabled={isPending}
       loadingText="Saving"
       onClick={() =>
-        saveCustomizeFn({
+        saveConfig.mutate({
           configId,
           color: options.color.value,
           material: options.material.value,
