@@ -20,7 +20,7 @@ const useSaveCustomization = ({
   //saveCustomize mutation Function
   const mutation = useMutation({
     mutationFn: async (args: SaveCustomizeArgs) => {
-      await Promise.all([customizationSaveFn, _saveCustomize(args)]);
+      await Promise.all([customizationSaveFn(), _saveCustomize(args)]);
     },
     onError: (error) => {
       toast({
@@ -30,7 +30,6 @@ const useSaveCustomization = ({
       });
     },
     onSuccess(data) {
-      console.log(data);
       router.push(`/configure/preview?id=${configId}`);
     },
   });

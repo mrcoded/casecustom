@@ -1,12 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import {
-  signIn,
-  SignInResponse,
-  signOut,
-  SignOutResponse,
-} from "next-auth/react";
+import { signIn, SignInResponse } from "next-auth/react";
 import { useMutation } from "@tanstack/react-query";
 
 import { LoginProps } from "@/types/auth";
@@ -20,13 +15,6 @@ const loginServiceFn = async (
     password: data.password,
     redirect: false,
   });
-};
-
-// Logout function handler
-export const logoutServiceFn = async (): Promise<
-  SignOutResponse | undefined
-> => {
-  return await signOut({ callbackUrl: "/", redirect: true });
 };
 
 export function loginService() {
@@ -44,7 +32,7 @@ export function loginService() {
           variant: "default",
         });
 
-        router.push("/configure/upload");
+        router.push("/auth-callback");
       } else {
         console.log(data);
         toast({
