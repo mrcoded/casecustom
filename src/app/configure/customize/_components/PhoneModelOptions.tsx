@@ -3,7 +3,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { MODELS } from "@/validators/option-validators";
-import { CustomizationOptionsProps } from "../customize.types";
+import { CustomizationOptionsProps } from "@/types/customize.types";
 
 import {
   DropdownMenu,

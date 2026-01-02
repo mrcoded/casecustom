@@ -9,7 +9,7 @@ import Confetti from "react-dom-confetti";
 import { useSession } from "next-auth/react";
 import { Configuration } from "@prisma/client";
 
-import { paymentService } from "@/services/payment.service";
+import { PaymentService } from "@/services/payment.service";
 import { COLORS, MODELS } from "@/validators/option-validators";
 
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
   //configure confetti
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
-  useEffect(() => setShowConfetti(true));
+  useEffect(() => setShowConfetti(true), []);
 
   //extract id from configuration
   const { id } = configuration;
@@ -45,7 +45,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   )!;
 
   //Payment service hooks
-  const { mutate: payment } = paymentService({ configId: id });
+  const { mutate: payment } = PaymentService({ configId: id });
 
   //HandleCheckout function handler
   const handleCheckout = () => {

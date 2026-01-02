@@ -17,7 +17,7 @@ const loginServiceFn = async (
   });
 };
 
-export function loginService() {
+export function LoginService() {
   const router = useRouter();
   const { toast } = useToast();
 

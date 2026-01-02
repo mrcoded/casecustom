@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 import HandleResize from "@/components/HandleResize";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { CustomizeDnDAreaProps } from "../customize.types";
+import { CustomizeDnDAreaProps } from "@/types/customize.types";
 
 const CustomizeDnDArea = ({
   options,

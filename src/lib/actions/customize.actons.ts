@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/config/db";
-import { SaveCustomizeArgs } from "@/app/configure/customize/customize.types";
+import { SaveCustomizeArgs } from "@/types/customize.types";
 
 export async function saveCustomize({
   color,

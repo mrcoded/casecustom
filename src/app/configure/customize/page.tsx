@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 
 import { db } from "@/config/db";
-import { CustomizePageProps } from "./customize.types";
+import { CustomizePageProps } from "@/types/customize.types";
 
 import DesignCustomization from "./_components/DesignCustomization";
 

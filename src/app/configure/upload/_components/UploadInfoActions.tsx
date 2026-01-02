@@ -1,8 +1,12 @@
 import React from "react";
 
 import { Progress } from "@/components/ui/progress";
-import { UploadInfoActionsProps } from "../upload.types";
-import { Image, Loader2, MousePointerSquareDashed } from "lucide-react";
+import { UploadInfoActionsProps } from "@/types/upload.types";
+import {
+  Image as ImgIcon,
+  Loader2,
+  MousePointerSquareDashed,
+} from "lucide-react";
 
 const UploadInfoActions = ({
   open,
@@ -18,7 +22,7 @@ const UploadInfoActions = ({
       ) : isUploading || isPending ? (
         <Loader2 className="animate-spin h-6 w-6 text-zinc-500 mb-2" />
       ) : (
-        <Image className="h-6 w-6 text-zinc-500 mb-2" />
+        <ImgIcon className="h-6 w-6 text-zinc-500 mb-2" />
       )}
       <div className="flex flex-col justify-center mb-2 text-sm text-zinc-700">
         {isUploading ? (

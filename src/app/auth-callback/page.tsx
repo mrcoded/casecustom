@@ -1,9 +1,10 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
+
+import { useSession } from "next-auth/react";
 
 const Page = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const Page = () => {
         router.push("/");
       }
     }
-  }, [session?.status, configId]);
+  }, [session?.status, configId, router]);
 
   return (
     <div className="w-full mt-24 justify-center">

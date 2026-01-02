@@ -1,10 +1,10 @@
 "use client";
 
-import { CaseColor } from "@prisma/client";
 import React, { useEffect, useRef, useState } from "react";
-import { AspectRatio } from "./ui/aspect-ratio";
+
 import { cn } from "@/lib/utils";
-import { set } from "zod";
+import { CaseColor } from "@prisma/client";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const PhonePreview = ({
   croppedImageUrl,
@@ -33,7 +33,7 @@ const PhonePreview = ({
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [ref.current]);
+  }, []);
 
   let caseBackgroundColor = "bg-zinc-950";
   if (color === "blue") caseBackgroundColor = "bg-blue-900";
@@ -57,6 +57,7 @@ const PhonePreview = ({
             caseBackgroundColor
           )}
           src={croppedImageUrl}
+          alt="Cropped preview image"
         />
       </div>
 
@@ -64,6 +65,7 @@ const PhonePreview = ({
         <img
           src="/clearphone.png"
           className="pointer-events-none h-full w-full antialiased rounded-md"
+          alt="empty phone image"
         />
       </div>
     </AspectRatio>

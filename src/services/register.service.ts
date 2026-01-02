@@ -6,7 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { registerUserFn } from "@/lib/actions/auth.actions";
 
-export default function registerService() {
+export default function RegisterService() {
   const router = useRouter();
   const { toast } = useToast();
 

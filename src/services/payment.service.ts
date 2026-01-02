@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { createCheckoutSession } from "@/lib/actions/preview.actions";
 
-export function paymentService({ configId }: { configId: string }) {
+export function PaymentService({ configId }: { configId: string }) {
   const { toast } = useToast();
   const router = useRouter();
 

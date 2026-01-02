@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Radio, RadioGroup } from "@headlessui/react";
 
 import { COLORS } from "@/validators/option-validators";
-import { CustomizationOptionsProps } from "../customize.types";
+import { CustomizationOptionsProps } from "../../../../types/customize.types";
 
 import { Label } from "@/components/ui/label";
 

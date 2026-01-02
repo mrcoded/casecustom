@@ -4,7 +4,7 @@ import React from "react";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import registerService from "@/services/register.service";
+import RegisterService from "@/services/register.service";
 
 import { Input } from "@/components/ui/input";
 import AuthButton from "@/components/ui/Button/AuthButton";
@@ -14,7 +14,7 @@ import { RegisterAuthSchema } from "@/validators/auth-validator";
 
 export function RegisterForm() {
   //RegisterUser service function handler
-  const { registerUser, isPending } = registerService();
+  const { registerUser, isPending } = RegisterService();
 
   //Form validation
   const {

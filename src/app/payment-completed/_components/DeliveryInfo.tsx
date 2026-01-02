@@ -1,7 +1,7 @@
 import React from "react";
 
 import AddressComponent from "@/components/AddressComponent";
-import { DeliveryInfoProps } from "../payment-completed.types";
+import { DeliveryInfoProps } from "@/types/payment-completed.types";
 
 const DeliveryInfo = ({
   shippingAddress,

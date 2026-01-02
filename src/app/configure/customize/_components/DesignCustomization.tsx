@@ -8,7 +8,8 @@ import { saveCustomize as _saveCustomize } from "@/lib/actions/customize.actons"
 import {
   CustomizeOptionsProps,
   DesignCustomizationProps,
-} from "../customize.types";
+} from "@/types/customize.types";
+
 import {
   COLORS,
   FINISHES,

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { saveCustomize as _saveCustomize } from "@/lib/actions/customize.actons";
-import { SaveCustomizeArgs } from "@/app/configure/customize/customize.types";
+import { SaveCustomizeArgs } from "@/types/customize.types";
 
 const useSaveCustomization = ({
   configId,

@@ -6,8 +6,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import useSaveCustomizaton from "@/hooks/useSaveCustomization";
-import { saveCustomizationService } from "@/services/save-customize.service";
-import { SaveCustomizeServiceProps } from "@/app/configure/customize/customize.types";
+import { SaveCustomizationService } from "@/services/save-customize.service";
+import { SaveCustomizeServiceProps } from "@/types/customize.types";
 
 const SaveCustomizationBtn = ({
   configId,
@@ -21,7 +21,7 @@ const SaveCustomizationBtn = ({
 }: SaveCustomizeServiceProps) => {
   //Customization Save function
   const customizationSaveFn = useCallback(() => {
-    return saveCustomizationService({
+    return SaveCustomizationService({
       options,
       configId,
       imageUrl,
@@ -31,7 +31,16 @@ const SaveCustomizationBtn = ({
       renderedDimension,
       renderedPosition,
     });
-  }, [options, configId]);
+  }, [
+    options,
+    configId,
+    imageUrl,
+    startUpload,
+    phoneCaseRef,
+    containerCaseRef,
+    renderedDimension,
+    renderedPosition,
+  ]);
 
   //Save Customization hooks handler
   const { isPending, saveConfig } = useSaveCustomizaton({

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { db } from "@/config/db";
 import DesignPreview from "./_components/DesignPreview";
-import { CustomizePageProps } from "../customize/customize.types";
+import { CustomizePageProps } from "@/types/customize.types";
 
 const Page = async ({ searchParams }: CustomizePageProps) => {
   const { id } = await searchParams;

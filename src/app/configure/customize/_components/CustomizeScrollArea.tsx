@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CustomizationOptionsProps } from "../customize.types";
+import { CustomizationOptionsProps } from "@/types/customize.types";
 
 import PhoneModelOptions from "./PhoneModelOptions";
 import DesignMaterialType from "./DesignMaterialType";

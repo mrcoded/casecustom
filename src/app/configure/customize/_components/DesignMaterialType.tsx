@@ -1,7 +1,7 @@
 import React from "react";
 
 import { cn, formatPrice } from "@/lib/utils";
-import { CustomizationOptionsProps } from "../customize.types";
+import { CustomizationOptionsProps } from "@/types/customize.types";
 import { FINISHES, MATERIALS } from "@/validators/option-validators";
 
 import {

@@ -64,10 +64,13 @@ const Page = () => {
   };
 
   //successful upload handler
-  const onDropAccepted = useCallback((acceptedFiles: File[]) => {
-    startUpload(acceptedFiles, { configId: undefined });
-    setIsDragOver(false);
-  }, []);
+  const onDropAccepted = useCallback(
+    (acceptedFiles: File[]) => {
+      startUpload(acceptedFiles, { configId: undefined });
+      setIsDragOver(false);
+    },
+    [startUpload]
+  );
 
   return (
     <div

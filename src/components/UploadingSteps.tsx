@@ -65,6 +65,7 @@ const UploadingSteps = () => {
                         "border-zinc-700": isCurrent,
                       }
                     )}
+                    alt="step image"
                   />
                 </span>
 

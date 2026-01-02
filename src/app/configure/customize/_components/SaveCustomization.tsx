@@ -2,7 +2,7 @@ import React from "react";
 import { formatPrice } from "@/lib/utils";
 
 import { BASE_PRICE } from "@/constant/product";
-import { SaveCustomizeServiceProps } from "../customize.types";
+import { SaveCustomizeServiceProps } from "@/types/customize.types";
 import { saveCustomize as _saveCustomize } from "@/lib/actions/customize.actons";
 
 import SaveCustomizationBtn from "@/components/ui/Button/SaveCustomizationBtn";
