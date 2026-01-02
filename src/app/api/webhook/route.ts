@@ -23,7 +23,9 @@ export async function POST(req: Request) {
     );
 
     // console.log("event start", signature, "event_type", event.type);
-
+    if (!event) {
+      throw new Error("Invalid Stripe Event");
+    }
     //user already paid
     if (event.type === "checkout.session.completed") {
       // if (!event.data.object.customer_details?.email) {
