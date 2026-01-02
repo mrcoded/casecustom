@@ -41,6 +41,6 @@ export async function registerUserFn(
       message: `Registration successful, redirecting to Login...`,
     };
   } catch (error) {
-    throw Error;
+    throw new Error("Registration failed. Please try again.");
   }
 }
