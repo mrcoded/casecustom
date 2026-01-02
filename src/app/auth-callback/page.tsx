@@ -1,35 +1,33 @@
 "use client";
 
-import { getAuthStatus } from "@/lib/actions/auth.actions";
-import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Page = () => {
-  const [configId, setConfigId] = useState<string | null>(null);
   const router = useRouter();
+  const session = useSession();
 
+  const [configId, setConfigId] = useState<string | null>(null);
+
+  //get configurationId from localStorage
   useEffect(() => {
     const configurationId = localStorage.getItem("configurationId");
     if (configurationId) setConfigId(configurationId);
   }, []);
 
-  const { data } = useQuery({
-    queryKey: ["auth-callback"],
-    queryFn: async () => await getAuthStatus(),
-    retry: true,
-    retryDelay: 200,
-  });
-
-  if (data?.success) {
-    if (configId) {
-      localStorage.removeItem("configurationId");
-      router.push(`/configure/preview?id=${configId}`);
-    } else {
-      router.push("/");
+  //redirect after authentication
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      if (configId) {
+        localStorage.removeItem("configurationId");
+        router.push(`/configure/preview?id=${configId}`);
+      } else {
+        router.push("/");
+      }
     }
-  }
+  }, [session?.status, configId]);
 
   return (
     <div className="w-full mt-24 justify-center">
