@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { db } from "@/config/db";
 import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -11,7 +11,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {
   try {
     const body = await req.text();
-    const signature = headers().get("stripe-signature");
+    const headersList = await headers();
+    const signature = headersList.get("stripe-signature") as string;
 
     if (!signature) {
       return new Response("Invalid signature", { status: 400 });
@@ -24,29 +25,30 @@ export async function POST(req: Request) {
       process.env.STRIPE_WEBHOOK_SECRET!
     );
 
+    // console.log("event start", signature, "event_type", event.type);
+
     //user already paid
     if (event.type === "checkout.session.completed") {
-      if (!event.data.object.customer_details?.email) {
-        throw new Error("Missing user email");
-      }
+      // if (!event.data.object.customer_details?.email) {
+      //   throw new Error("Missing user email");
+      // }
 
       const session = event.data.object as Stripe.Checkout.Session;
-
-      const { userId, orderId } = session.metadata || {
+      const { userId, orderId } = session.metadata ?? {
         userId: null,
         orderId: null,
       };
-
+      // console.log("success", userId);
       if (!userId || !orderId) {
         throw new Error("Invalid request metadata");
       }
 
       const billingAddress = session.customer_details!.address;
-      const shippingAddress = session.shipping_details!.address;
+      const shippingAddress = session.customer_details!.address;
 
-      const updatedOrder = await db.order.update({
+      await db.order.update({
         where: {
-          id: orderId,
+          id: orderId!,
         },
         data: {
           isPaid: true,
@@ -73,33 +75,31 @@ export async function POST(req: Request) {
         },
       });
 
-      await resend.emails.send({
-        from: "CaseCustom <de*****@gmail.com>",
-        to: [event.data.object.customer_details.email],
-        subject: "Thanks for your order!",
-        react: OrderRecievedEmail({
-          orderId,
-          orderDate: updatedOrder.createdAt.toLocaleDateString(),
-          //@ts-ignore
-          shippingAddress: {
-            name: session.customer_details!.name!,
-            city: shippingAddress!.city!,
-            country: shippingAddress!.country!,
-            postalCode: shippingAddress!.postal_code!,
-            street: shippingAddress!.line1!,
-            state: shippingAddress!.state!,
-          },
-        }),
-      });
+      //   await resend.emails.send({
+      //     from: "CaseCustom <de*****@gmail.com>",
+      //     to: [event.data.object.customer_details.email],
+      //     subject: "Thanks for your order!",
+      //     react: OrderRecievedEmail({
+      //       orderId,
+      //       orderDate: updatedOrder.createdAt.toLocaleDateString(),
+      //       //@ts-ignore
+      //       shippingAddress: {
+      //         name: session.customer_details!.name!,
+      //         city: shippingAddress!.city!,
+      //         country: shippingAddress!.country!,
+      //         postalCode: shippingAddress!.postal_code!,
+      //         street: shippingAddress!.line1!,
+      //         state: shippingAddress!.state!,
+      //       },
+      //     }),
+      //   });
+      return NextResponse.json(null, { status: 200 });
     }
 
-    return NextResponse.json({ result: event, ok: true });
+    return NextResponse.json(null, { status: 200 });
   } catch (error) {
-    console.log(error);
+    // console.error("stripe error", error.message);
 
-    return NextResponse.json(
-      { message: "Something went wrong", ok: false },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: error, ok: false }, { status: 502 });
   }
 }
