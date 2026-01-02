@@ -126,7 +126,7 @@ export interface CustomizationOptionsProps {
 }
 
 export interface CustomizePageProps {
-  searchParams: {
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 }
