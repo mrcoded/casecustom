@@ -1,16 +1,20 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
+
+import { logoutServiceFn } from "@/services/logout.service";
 
 import { buttonVariants } from "@/components/ui/button";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
-import { logoutServiceFn } from "@/services/logout.service";
 
-const Navbar = async () => {
-  const session = await getServerSession();
-  const user = session?.user;
+const Navbar = () => {
+  const session = useSession();
+  const user = session?.data?.user;
 
+  //check if user is admin
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
   return (
@@ -22,7 +26,7 @@ const Navbar = async () => {
           </Link>
 
           <div className="h-full flex items-center space-x-4">
-            {user ? (
+            {session.status === "authenticated" ? (
               <>
                 <button
                   onClick={logoutServiceFn}
