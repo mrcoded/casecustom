@@ -1,4 +1,4 @@
-import { ShippingAddress } from "@prisma/client";
+import type { ShippingAddress } from "~/generated/prisma/client";
 import {
   Body,
   Column,

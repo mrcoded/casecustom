@@ -6,12 +6,12 @@ import {
   MODELS,
 } from "@/validators/option-validators";
 
-import {
+import type {
   CaseColor,
   CaseFinish,
   CaseMaterial,
   PhoneModel,
-} from "@prisma/client";
+} from "~/generated/prisma/client";
 import { ClientUploadedFileData } from "uploadthing/types";
 import { UseMutationResult } from "@tanstack/react-query";
 

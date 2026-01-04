@@ -1,6 +1,6 @@
 "use server";
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { db } from "@/config/db";
 
 import { RegisterAuthFormValues } from "@/types/auth";

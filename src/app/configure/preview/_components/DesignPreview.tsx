@@ -7,7 +7,7 @@ import { ArrowRight, Check } from "lucide-react";
 
 import Confetti from "react-dom-confetti";
 import { useSession } from "next-auth/react";
-import { Configuration } from "@prisma/client";
+import { Configuration } from "~/generated/prisma/client";
 
 import { PaymentService } from "@/services/payment.service";
 import { COLORS, MODELS } from "@/validators/option-validators";

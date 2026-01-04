@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { Check, ChevronsUpDown } from "lucide-react";
 
-import { OrderStatus } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 
 import { cn } from "@/lib/utils";
+import { ORDER_STATUSES } from "@/constant/order-status";
 import { changeOrderStatus } from "@/lib/actions/order-status.actions";
 
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const LABEL_MAP: Record<keyof typeof OrderStatus, string> = {
+// types
+type OrderStatus = (typeof ORDER_STATUSES)[number];
+
+// label map for order status
+const LABEL_MAP: Record<OrderStatus, string> = {
   awaiting_shipment: "Awaiting Shipment",
   fulfilled: "Fulfilled",
   shipped: "Shipped",
@@ -50,7 +54,7 @@ const StatusDropdown = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0">
-        {Object.keys(OrderStatus).map((status) => (
+        {ORDER_STATUSES.map((status) => (
           <DropdownMenuItem
             key={status}
             className={cn(

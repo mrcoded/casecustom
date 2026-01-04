@@ -2,7 +2,7 @@
 
 import { db } from "@/config/db";
 
-import { Order } from "@prisma/client";
+import type { Order } from "~/generated/prisma/client";
 import { getServerSession } from "next-auth";
 
 import { stripe } from "@/lib/stripe";

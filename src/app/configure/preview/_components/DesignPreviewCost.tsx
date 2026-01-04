@@ -1,6 +1,6 @@
 import React from "react";
 import { formatPrice } from "@/lib/utils";
-import { Configuration } from "@prisma/client";
+import { Configuration } from "~/generated/prisma/client";
 
 import PreviewCostPrice from "./PreviewCostPrice";
 import { DESIGN_PRICE } from "@/constant/design-preview";
