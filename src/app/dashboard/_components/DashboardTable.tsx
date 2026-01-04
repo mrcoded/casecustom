@@ -14,7 +14,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const DashboardTable = () => {
+const DashboardTable = async () => {
+  const ordersData = await orders();
+
   return (
     <Table>
       <TableHeader>
@@ -27,7 +29,7 @@ const DashboardTable = () => {
       </TableHeader>
 
       <TableBody>
-        {orders.map((order) => (
+        {ordersData.map((order) => (
           <TableRow key={order.id} className="bg-accent">
             <TableCell>
               <div className="font-medium">{order.shippingAddress?.name}</div>
