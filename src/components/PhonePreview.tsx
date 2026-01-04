@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { CaseColor } from "~/generated/prisma/client";
+import { CaseColor } from "@prisma/client";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const PhonePreview = ({

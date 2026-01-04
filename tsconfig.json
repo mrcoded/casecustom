@@ -18,8 +18,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "~/generated/*": ["./generated/prisma/client"]
+      "@/*": ["./src/*"]
     },
     "target": "ES2017"
   },
@@ -28,8 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/api/auth/[...nextauth]",
-    "generated/**/*"
+    "src/app/api/auth/[...nextauth]"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/config/db";
-import type { OrderStatus } from "~/generated/prisma/client";
+import { OrderStatus } from "@prisma/client";
 
 export const changeOrderStatus = async ({
   id,
