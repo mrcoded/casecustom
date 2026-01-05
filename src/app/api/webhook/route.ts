@@ -22,22 +22,21 @@ export async function POST(req: Request) {
       process.env.STRIPE_WEBHOOK_SECRET!
     );
 
-    // console.log("event start", signature, "event_type", event.type);
     if (!event) {
       throw new Error("Invalid Stripe Event");
     }
     //user already paid
     if (event.type === "checkout.session.completed") {
-      // if (!event.data.object.customer_details?.email) {
-      //   throw new Error("Missing user email");
-      // }
+      if (!event.data.object.customer_details?.email) {
+        throw new Error("Missing user email");
+      }
 
       const session = event.data.object as Stripe.Checkout.Session;
       const { userId, orderId } = session.metadata ?? {
         userId: null,
         orderId: null,
       };
-      // console.log("success", userId);
+
       if (!userId || !orderId) {
         throw new Error("Invalid request metadata");
       }
@@ -97,8 +96,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(null, { status: 200 });
   } catch (error) {
-    // console.error("stripe error", error.message);
-
     return NextResponse.json({ message: error, ok: false }, { status: 502 });
   }
 }

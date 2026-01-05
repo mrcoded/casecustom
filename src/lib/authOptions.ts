@@ -1,4 +1,4 @@
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import { db } from "@/config/db";
 import { User, NextAuthOptions } from "next-auth";
 

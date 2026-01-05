@@ -25,7 +25,7 @@ export async function registerUserFn(
     }
 
     //Encrypt password with bcrypt
-    const hashedPassword = await bcrypt.hash(password, 16);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     //Create new user
     await db.user.create({

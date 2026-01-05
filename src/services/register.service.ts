@@ -34,7 +34,7 @@ export default function RegisterService() {
     onError: (data) => {
       toast({
         title: "Something went wrong",
-        description: `${data.cause}`,
+        description: `${data.message}`,
         variant: "destructive",
       });
     },
