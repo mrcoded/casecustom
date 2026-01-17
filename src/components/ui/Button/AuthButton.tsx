@@ -17,7 +17,7 @@ const AuthButton = ({
       className={buttonVariants({
         size: "lg",
         className:
-          "hidden sm:flex items-center gap-1 w-full py-2 mt-6 font-bold transition-colors duration-200",
+          "flex items-center gap-1 w-full py-2 mt-6 font-bold transition-colors duration-200",
       })}
     >
       {isPending ? btnPending : btnLabel}
