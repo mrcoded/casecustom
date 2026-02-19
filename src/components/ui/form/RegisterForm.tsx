@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,8 +11,11 @@ import AuthButton from "@/components/ui/Button/AuthButton";
 
 import { RegisterAuthFormValues } from "@/types/auth";
 import { RegisterAuthSchema } from "@/validators/auth-validator";
+import PasswordVisibility from "@/components/PasswordVisibility";
 
 export function RegisterForm() {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   //RegisterUser service function handler
   const { registerUser, isPending } = RegisterService();
 
@@ -59,13 +62,19 @@ export function RegisterForm() {
           type="email"
           placeholder="e.g. yourname@example.com"
         />
-        <Input
-          name="password"
-          control={control}
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-        />
+        <div className="relative flex flex-col space-y-1.5">
+          <Input
+            name="password"
+            control={control}
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="••••••••"
+          />
+          <PasswordVisibility
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+        </div>
 
         <AuthButton
           isPending={isPending}

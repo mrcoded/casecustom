@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,8 +11,11 @@ import { LoginAuthSchema } from "@/validators/auth-validator";
 
 import { Input } from "@/components/ui/input";
 import AuthButton from "@/components/ui/Button/AuthButton";
+import PasswordVisibility from "@/components/PasswordVisibility";
 
 export function LoginForm() {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const { mutate: loginUser, isPending } = LoginService();
 
   // Initialize validation
@@ -45,13 +48,19 @@ export function LoginForm() {
           type="email"
           placeholder="e.g. yourname@example.com"
         />
-        <Input
-          name="password"
-          control={control}
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-        />
+        <div className="relative flex flex-col space-y-1.5">
+          <Input
+            name="password"
+            control={control}
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="••••••••"
+          />
+          <PasswordVisibility
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+        </div>
 
         <AuthButton
           isPending={isPending}
