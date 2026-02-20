@@ -1,4 +1,4 @@
-import { compare } from "bcryptjs";
+import argon2 from "argon2";
 import { db } from "@/config/db";
 import { User, NextAuthOptions } from "next-auth";
 
@@ -12,7 +12,7 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/login",
+    signIn: "/auth/login",
   },
   providers: [
     CredentialsProvider({
@@ -41,9 +41,9 @@ export const authOptions: NextAuthOptions = {
           }
 
           // Check if password matches
-          const isPasswordValid = await compare(
+          const isPasswordValid = await argon2.verify(
+            existingUser.password,
             credentials.password,
-            existingUser.password
           );
 
           if (!isPasswordValid) {

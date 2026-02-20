@@ -1,12 +1,12 @@
 "use server";
 
-import bcrypt from "bcryptjs";
+import argon2 from "argon2";
 import { db } from "@/config/db";
 
 import { RegisterAuthFormValues } from "@/types/auth";
 
 export async function registerUserFn(
-  formData: RegisterAuthFormValues
+  formData: RegisterAuthFormValues,
 ): Promise<RegisterAuthFormValues> {
   //destructure data
   const { email, password, name } = formData;
@@ -24,8 +24,13 @@ export async function registerUserFn(
       };
     }
 
-    //Encrypt password with bcrypt
-    const hashedPassword = await bcrypt.hash(password, 10);
+    //Encrypt password with argon2
+    const hashedPassword = await argon2.hash(password, {
+      type: argon2.argon2id,
+      memoryCost: 2 ** 16, //64mb
+      timeCost: 5,
+      parallelism: 1,
+    });
 
     //Create new user
     await db.user.create({
