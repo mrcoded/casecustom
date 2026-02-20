@@ -16,8 +16,15 @@ import { Button } from "@/components/ui/button";
 import DesignPreviewCost from "./DesignPreviewCost";
 import PhoneTemplate from "@/components/PhoneTemplate";
 import LoginModal from "@/components/modals/LoginModal";
+import { Session } from "next-auth";
 
-const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
+const DesignPreview = ({
+  user,
+  configuration,
+}: {
+  user?: Session["user"];
+  configuration: Configuration;
+}) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
   //configure confetti
@@ -27,21 +34,17 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   //extract id from configuration
   const { id } = configuration;
 
-  //Get user
-  const { data } = useSession();
-  const user = data?.user;
-
   //destructure color, model, finish, material from configuration
   const { color, model } = configuration;
 
   //Get color choice
   const tw = COLORS.find(
-    (supportedColor) => supportedColor.value === color
+    (supportedColor) => supportedColor.value === color,
   )?.tw;
 
   //Get phone model choice
   const { label: modeLabel } = MODELS.options.find(
-    ({ value }) => value === model
+    ({ value }) => value === model,
   )!;
 
   //Payment service hooks

@@ -1,12 +1,17 @@
 import React from "react";
 import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import { db } from "@/config/db";
+
 import DesignPreview from "./_components/DesignPreview";
 import { CustomizePageProps } from "@/types/customize.types";
 
 const Page = async ({ searchParams }: CustomizePageProps) => {
   const { id } = await searchParams;
+  //get user session
+  const session = await getServerSession();
+  const user = session?.user;
 
   //if no id from searchParams
   if (!id || typeof id !== "string") {
@@ -23,7 +28,7 @@ const Page = async ({ searchParams }: CustomizePageProps) => {
     return notFound();
   }
 
-  return <DesignPreview configuration={configuraton} />;
+  return <DesignPreview user={user} configuration={configuraton} />;
 };
 
 export default Page;
