@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { logoutServiceFn } from "@/services/logout.service";
@@ -11,11 +12,11 @@ import { buttonVariants } from "@/components/ui/button";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const session = useSession();
-  const user = session?.data?.user;
 
-  //check if user is admin
-  const isAdmin = user?.email === process.env.ADMIN_EMAIL;
+  //check if current page is dashboard
+  const isDashboard = pathname.includes("/dashboard");
 
   return (
     <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
@@ -38,28 +39,28 @@ const Navbar = () => {
                   Sign out
                 </button>
 
-                {isAdmin ? (
+                {!isDashboard ? (
                   <Link
                     href="/dashboard"
-                    className={buttonVariants({
+                    className={`${buttonVariants({
                       size: "sm",
                       variant: "ghost",
-                    })}
+                    })} flex items-center gap-1`}
                   >
                     Dashboard ✨
                   </Link>
-                ) : null}
-
-                <Link
-                  href="/configure/upload"
-                  className={buttonVariants({
-                    size: "sm",
-                    className: "hidden sm:flex items-center gap-1",
-                  })}
-                >
-                  Create case
-                  <ArrowRight className="ml-1.5 h-5 w-5" />
-                </Link>
+                ) : (
+                  <Link
+                    href="/configure/upload"
+                    className={buttonVariants({
+                      size: "sm",
+                      className: "flex items-center gap-1",
+                    })}
+                  >
+                    Create case
+                    <ArrowRight className="sm:ml-1.5 sm:h-5 sm:w-5" />
+                  </Link>
+                )}
               </>
             ) : (
               <>
