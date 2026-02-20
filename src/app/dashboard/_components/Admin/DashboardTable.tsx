@@ -3,8 +3,6 @@ import React from "react";
 import { formatPrice } from "@/lib/utils";
 import { orders } from "@/services/dashboard.service";
 
-import StatusDropdown from "./StatusDropdown";
-
 import {
   Table,
   TableBody,
@@ -13,6 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
+import StatusDropdown from "./StatusDropdown";
 
 const DashboardTable = async () => {
   const ordersData = await orders();
