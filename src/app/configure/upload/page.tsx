@@ -2,6 +2,7 @@
 
 import { useCallback, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 import Dropzone, { FileRejection } from "react-dropzone";
@@ -13,6 +14,9 @@ import UploadInfoActions from "./_components/UploadInfoActions";
 const Page = () => {
   const router = useRouter();
   const { toast } = useToast();
+  //get userId from session
+  const { data } = useSession();
+  const userId = data?.user?.id;
 
   const [isPending, startTransition] = useTransition();
 
@@ -66,10 +70,10 @@ const Page = () => {
   //successful upload handler
   const onDropAccepted = useCallback(
     (acceptedFiles: File[]) => {
-      startUpload(acceptedFiles, { configId: undefined });
+      startUpload(acceptedFiles, { configId: undefined, userId: userId });
       setIsDragOver(false);
     },
-    [startUpload]
+    [startUpload, userId],
   );
 
   return (
@@ -78,7 +82,7 @@ const Page = () => {
         "relative h-full flex-1 my-16 w-full rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl flex justify-center flex-col items-center",
         {
           "ring-blue-900/25 bg-blue-900/10": isDragOver,
-        }
+        },
       )}
     >
       <div className="relative flex flex-1 flex-col items-center justify-center w-full">
