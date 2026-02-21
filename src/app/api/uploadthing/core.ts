@@ -7,12 +7,17 @@ const f = createUploadthing();
 
 export const ourFileRouter = {
   imageUploader: f({ image: { maxFileSize: "4MB" } })
-    .input(z.object({ configId: z.string().optional() }))
+    .input(
+      z.object({
+        configId: z.string().optional(),
+        userId: z.string().optional(),
+      }),
+    )
     .middleware(async ({ input }) => {
       return { input };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      const { configId } = metadata.input;
+      const { configId, userId } = metadata.input;
 
       const res = await fetch(file.ufsUrl);
       const buffer = await res.arrayBuffer();
@@ -28,6 +33,17 @@ export const ourFileRouter = {
             width: width || 500,
           },
         });
+
+        //save logged in user uploads record
+        if (userId) {
+          await db.uploads.create({
+            data: {
+              imageUrl: file.ufsUrl,
+              userId: userId,
+              configurationId: configuration.id,
+            },
+          });
+        }
 
         return { configId: configuration.id };
       } else {
