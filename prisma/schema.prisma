@@ -20,13 +20,24 @@ enum OrderStatus {
 }
 
 enum PhoneModel {
-  iphonex
   iphone11
+  iphone11Pro
+  iphone11ProMax
   iphone12
+  iphone12Pro
+  iphone12ProMax
   iphone13
+  iphone13Pro
+  iphone13ProMax
   iphone14
+  iphone14Pro
+  iphone14ProMax
   iphone15
+  iphone15Pro
+  iphone15ProMax
   iphone16
+  iphone16Pro
+  iphone16ProMax
 }
 
 enum CaseMaterial {
@@ -58,12 +69,24 @@ model Configuration {
   Order           Order[]
 }
 
+model Uploads {
+  id              String  @id @default(cuid()) @map("_id")
+  imageUrl        String?
+  user            User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String?
+  configurationId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
-  id       String  @id @default(cuid()) @map("_id")
+  id       String    @id @default(cuid()) @map("_id")
   name     String
-  email    String  @unique
+  email    String    @unique
   password String
   Order    Order[]
+  uploads  Uploads[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
