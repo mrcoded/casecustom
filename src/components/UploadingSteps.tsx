@@ -1,25 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-const STEPS = [
-  {
-    name: "Step 1: Add image",
-    description: "Choose an image for your case",
-    url: "/upload",
-  },
-  {
-    name: "Step 2: Customize design",
-    description: "Choose an image for your case",
-    url: "/customize",
-  },
-  {
-    name: "Step 3: Upload Summary",
-    description: "Review your final design",
-    url: "/preview",
-  },
-];
+import { STEPS } from "@/constant/uploading-steps";
 
 const UploadingSteps = () => {
   const pathname = usePathname();
@@ -30,7 +14,7 @@ const UploadingSteps = () => {
         const isCurrent = pathname.endsWith(step.url);
 
         const isCompleted = STEPS.slice(i + 1).some((step) =>
-          pathname.endsWith(step.url)
+          pathname.endsWith(step.url),
         );
 
         const imgPath = `/step-${i + 1}.jpg`;
@@ -44,7 +28,7 @@ const UploadingSteps = () => {
                   {
                     "bg-zinc-700": isCurrent,
                     "bg-primary": isCompleted,
-                  }
+                  },
                 )}
                 aria-hidden="true"
               />
@@ -52,18 +36,18 @@ const UploadingSteps = () => {
               <span
                 className={cn(
                   i !== 0 ? "lg:pl-9" : "",
-                  "flex items-center px-6 py-4 text-sm font-medium"
+                  "flex items-center px-6 py-2 text-sm font-medium",
                 )}
               >
                 <span className="flex-shrink-0">
                   <img
                     src={imgPath}
                     className={cn(
-                      "flex h-20 w-20 object-contain items-center justify-center",
+                      "flex h-10 sm:h-20 w-10 sm:w-20 object-contain items-center justify-center",
                       {
                         "border-none": isCompleted,
                         "border-zinc-700": isCurrent,
-                      }
+                      },
                     )}
                     alt="step image"
                   />
