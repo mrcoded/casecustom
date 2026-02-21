@@ -21,31 +21,29 @@ export const COLORS = [
 export const MODELS = {
   name: "models",
   options: [
-    { label: "iPhone X", value: "iphonex" },
-    {
-      label: "iPhone 11",
-      value: "iphone11",
-    },
-    {
-      label: "iPhone12",
-      value: "iphone12",
-    },
-    {
-      label: "iPhone13",
-      value: "iphone13",
-    },
-    {
-      label: "iPhone14",
-      value: "iphone14",
-    },
-    {
-      label: "iPhone15",
-      value: "iphone15",
-    },
-    {
-      label: "iPhone16",
-      value: "iphone16",
-    },
+    // iPhone 11 Series
+    { label: "iPhone 11 Pro", value: "iphone11Pro" },
+    { label: "iPhone 11 Pro Max", value: "iphone11ProMax" },
+
+    // iPhone 12 Series
+    { label: "iPhone 12 Pro", value: "iphone12Pro" },
+    { label: "iPhone 12 Pro Max", value: "iphone12ProMax" },
+
+    // iPhone 13 Series
+    { label: "iPhone 13 Pro", value: "iphone13Pro" },
+    { label: "iPhone 13 Pro Max", value: "iphone13ProMax" },
+
+    // iPhone 14 Series
+    { label: "iPhone 14 Pro", value: "iphone14Pro" },
+    { label: "iPhone 14 Pro Max", value: "iphone14ProMax" },
+
+    // iPhone 15 Series
+    { label: "iPhone 15 Pro", value: "iphone15Pro" },
+    { label: "iPhone 15 Pro Max", value: "iphone15ProMax" },
+
+    // iPhone 16 Series
+    { label: "iPhone 16 Pro", value: "iphone16Pro" },
+    { label: "iPhone 16 Pro Max", value: "iphone16ProMax" },
   ],
 } as const;
 
