@@ -33,8 +33,8 @@ export default function RootLayout({
               <div className="flex flex-1 justify-center flex-col h-full">
                 <QueryProvider>{children}</QueryProvider>
               </div>
+              <Footer />
             </main>
-            <Footer />
           </AuthProvider>
         </Suspense>
 
