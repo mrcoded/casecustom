@@ -29,12 +29,12 @@ export default function RootLayout({
           <AuthProvider>
             <Navbar />
 
-            <main className="flex grainy-light flex-col min-h-[calc(100vh-3.5rem-1px)]">
-              <div className="flex flex-1 flex-col h-full">
+            <main className="flex grainy-light flex-col min-h-[calc(100vh-3.5rem-1px)] ">
+              <div className="flex flex-1 justify-center flex-col h-full">
                 <QueryProvider>{children}</QueryProvider>
               </div>
-              <Footer />
             </main>
+            <Footer />
           </AuthProvider>
         </Suspense>
 
