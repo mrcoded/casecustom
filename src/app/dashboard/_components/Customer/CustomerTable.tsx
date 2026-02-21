@@ -1,7 +1,10 @@
 import React from "react";
 
+import { db } from "@/config/db";
+import { getServerSession } from "next-auth";
+
 import { formatPrice } from "@/lib/utils";
-import { userOrders } from "@/services/dashboard.service";
+import { authOptions } from "@/lib/authOptions";
 
 import {
   Table,
@@ -13,7 +16,21 @@ import {
 } from "@/components/ui/table";
 
 const CustomerTable = async () => {
-  const ordersData = await userOrders();
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id;
+
+  const userOrders = await db.order.findMany({
+    where: {
+      userId: userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      user: true,
+      shippingAddress: true,
+    },
+  });
 
   return (
     <div>
@@ -22,7 +39,7 @@ const CustomerTable = async () => {
         View and manage your orders here.
       </p>
 
-      {ordersData && ordersData.length > 0 ? (
+      {userOrders && userOrders.length > 0 ? (
         <Table>
           <TableHeader>
             <TableRow>
@@ -37,7 +54,7 @@ const CustomerTable = async () => {
           </TableHeader>
 
           <TableBody>
-            {ordersData.slice(0, 6).map((order) => (
+            {userOrders.slice(0, 6).map((order) => (
               <TableRow key={order.id} className="bg-accent">
                 <TableCell>
                   <div className="font-medium text-sm text-muted-foreground my-1.5">
