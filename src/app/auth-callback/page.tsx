@@ -6,11 +6,19 @@ import { Loader2 } from "lucide-react";
 
 import { useSession } from "next-auth/react";
 
+import { UploadService } from "@/services/uploads.services";
+
 const Page = () => {
   const router = useRouter();
   const session = useSession();
 
   const [configId, setConfigId] = useState<string | null>(null);
+
+  const { mutateAsync: handleUploads } = UploadService();
+
+  const createUploads = async (configId: string | null) => {
+    await handleUploads(configId);
+  };
 
   //get configurationId from localStorage
   useEffect(() => {
@@ -20,15 +28,28 @@ const Page = () => {
 
   //redirect after authentication
   useEffect(() => {
-    if (session?.status === "authenticated") {
-      if (configId) {
-        localStorage.removeItem("configurationId");
-        router.push(`/configure/preview?id=${configId}`);
-      } else {
-        router.push("/");
+    const syncUpload = async () => {
+      if (session?.status === "authenticated" && configId) {
+        try {
+          if (configId) {
+            //save imageurl to user uploads
+            await createUploads(configId);
+
+            localStorage.removeItem("configurationId");
+
+            //redirect to preview page
+            router.push(`/configure/preview?id=${configId}`);
+          } else {
+            router.push("/");
+          }
+        } catch (error) {
+          console.log("Error creating upload:", error);
+        }
       }
-    }
-  }, [session?.status, configId, router]);
+    };
+
+    syncUpload();
+  }, [session?.status, configId, router, handleUploads]);
 
   return (
     <div className="w-full mt-24 justify-center">
