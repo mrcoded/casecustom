@@ -16,6 +16,7 @@ const Page = () => {
 
   const { mutateAsync: handleUploads } = UploadService();
 
+  //function to create uploads
   const createUploads = async (configId: string | null) => {
     await handleUploads(configId);
   };
@@ -39,12 +40,14 @@ const Page = () => {
 
             //redirect to preview page
             router.push(`/configure/preview?id=${configId}`);
-          } else {
-            router.push("/");
           }
         } catch (error) {
           console.log("Error creating upload:", error);
         }
+      } else if (session?.status === "authenticated" && !configId) {
+        router.push("/");
+      } else {
+        router.push("/login");
       }
     };
 
