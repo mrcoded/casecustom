@@ -8,7 +8,7 @@ import { LoginProps } from "@/types/auth";
 import { useToast } from "@/components/ui/use-toast";
 
 const loginServiceFn = async (
-  data: LoginProps
+  data: LoginProps,
 ): Promise<SignInResponse | undefined> => {
   return await signIn("credentials", {
     email: data.email,
@@ -25,6 +25,9 @@ export function LoginService() {
   return useMutation({
     mutationFn: loginServiceFn,
     onSuccess: (data) => {
+      // Prefetch the auth-callback page to speed up navigation
+      router.prefetch("/auth-callback");
+
       if (data?.ok) {
         toast({
           title: "Success",
@@ -44,7 +47,7 @@ export function LoginService() {
     },
     onError: (error) => {
       toast({
-        title: "Something went wrongs",
+        title: "Something went wrong",
         description: `${error.message}`,
         variant: "destructive",
       });
